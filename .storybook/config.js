@@ -6,13 +6,13 @@ setOptions({
   url: 'https://github.com/ritz078/react-component-boilerplate',
   goFullScreen: false,
   showLeftPanel: false,
-  showDownPanel: true,
+  showDownPanel: false,
   showSearchBox: false,
   downPanelInRight: false,
 });
 
 function loadStories () {
-  require('../stories/App.story');
+  require('../stories/Scrabble.story.js');
 }
 
 configure(loadStories, module);

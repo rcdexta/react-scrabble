@@ -1,9 +1,9 @@
 import React from 'react';
 import { storiesOf, action } from '@kadira/storybook';
 
-import { App } from '../components';
+import { Board } from '../src';
 
 storiesOf('react-scrabble', module)
   .add('default', () => (
-    <App onClick={action('clicked')}/>
+    <Board/>
   ));

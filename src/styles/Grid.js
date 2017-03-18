@@ -72,5 +72,51 @@ export const TileDiv = styled.div`
     background-position: 177px 470px;
     background-color: rgb(222, 177, 102);
   }
-    
+  
+  &[data-letter='E']::after,
+  &[data-letter='A']::after,
+  &[data-letter='I']::after,
+  &[data-letter='O']::after,
+  &[data-letter='N']::after,
+  &[data-letter='R']::after,
+  &[data-letter='T']::after,
+  &[data-letter='L']::after,
+  &[data-letter='S']::after,
+  &[data-letter='U']::after {
+    content: "1";
+  }
+  
+  &[data-letter='D']::after,
+  &[data-letter='G']::after {
+    content: "2";
+  }
+  
+  &[data-letter='B']::after,
+  &[data-letter='C']::after,
+  &[data-letter='M']::after,
+  &[data-letter='P']::after {
+    content: "3";
+  }
+  
+  &[data-letter='F']::after,
+  &[data-letter='H']::after,
+  &[data-letter='V']::after,
+  &[data-letter='W']::after,
+  &[data-letter='Y']::after {
+    content: "4";
+  }
+  
+  &[data-letter='K']::after {
+    content: "5";
+  }
+  
+  &[data-letter='J']::after,
+  &[data-letter='X']::after {
+    content: "8";
+  }
+  
+  &[data-letter='Q']::after,
+  &[data-letter='Z']::after {
+    content: "10";
+  }
 `

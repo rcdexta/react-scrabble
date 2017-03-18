@@ -4,9 +4,15 @@ import {data} from './data'
 import Tile from './Tile'
 import update from 'immutability-helper';
 
+const givenWords = ['DISPLACEMENT', 'FORCE']
+
 export default class Grid extends Component {
 
-  state = {currentSelection: []}
+  state = {
+    curSelectionPos: [],
+    curSelectionLetters: [],
+    completedSelectionPos: []
+  }
 
   sameRow = (selection, row) => {
     return selection.every((s) => s.row === row)
@@ -37,28 +43,39 @@ export default class Grid extends Component {
     return this.areAdjacentTiles(selectedRows)
   }
 
-  handleSelect = (row, col) => {
-    const {currentSelection} = this.state
-    const firstSelection = currentSelection.length === 0
+  checkIfWordCompleted = () => {
+    const {curSelectionPos, curSelectionLetters} = this.state
+    const currentWord = curSelectionLetters.join('')
+    if (givenWords.some((w) => w === currentWord)) {
+      this.setState(update(this.state,
+        {
+          curSelectionPos: {$set: []},
+          curSelectionLetters: {$set: []},
+          completedSelectionPos: {
+            $push: curSelectionPos
+          }
+        }))
+    }
+  }
 
-    // if (!firstSelection) {
-    //   console.log(this.sameRow(currentSelection, row))
-    //   console.log(this.adjacentColumn(currentSelection, col))
-    //   console.log(this.sameCol(currentSelection, col))
-    //   console.log(this.adjacentRow(currentSelection, row))
-    // }
+  handleSelect = (row, col, letter) => {
+    const {curSelectionPos} = this.state
+    const firstSelection = curSelectionPos.length === 0
 
-    const adjacentTileSelected = (this.sameRow(currentSelection, row) && this.adjacentColumn(currentSelection, col)) ||
-      (this.sameCol(currentSelection, col) && this.adjacentRow(currentSelection, row))
+    const adjacentTileSelected = (this.sameRow(curSelectionPos, row) && this.adjacentColumn(curSelectionPos, col)) ||
+      (this.sameCol(curSelectionPos, col) && this.adjacentRow(curSelectionPos, row))
 
     if (firstSelection || adjacentTileSelected) {
       this.setState(update(this.state, {
-        currentSelection: {
+        curSelectionPos: {
           $push: [{...{row, col}}]
+        },
+        curSelectionLetters: {
+          $push: [letter]
         }
-      }))
+      }), this.checkIfWordCompleted)
     } else {
-      this.setState({currentSelection: [{row, col}]})
+      this.setState({curSelectionPos: [{row, col}], curSelectionLetters: [letter]})
     }
   }
 
@@ -68,11 +85,13 @@ export default class Grid extends Component {
         data.map((row, i) => {
           return row.line.split('').map((letter, j) => {
             const id = `${i}${j}`
-            const selected = this.state.currentSelection.some((sel) => sel.row === i && sel.col === j)
+            const selected = this.state.curSelectionPos.some((sel) => sel.row === i && sel.col === j)
+            const completed = this.state.completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
             return <Tile id={id}
                          key={id}
                          letter={letter}
                          selected={selected}
+                         completed={completed}
                          row={i}
                          col={j}
                          notifySelect={this.handleSelect}

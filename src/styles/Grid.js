@@ -120,3 +120,32 @@ export const TileDiv = styled.div`
     content: "10";
   }
 `
+
+export const BoardLayout = styled.div`
+  display: flex;
+`
+
+export const RightPane = styled.div`
+  margin-left: 10mm;
+  margin-top: 20mm;
+`
+export const ScoreDiv = styled.div`
+    padding: 23px;
+    background: linear-gradient(to bottom, #ebd19a 0%,#e3c083 100%);
+    box-shadow: 0 1.125mm 0.75mm -0.5mm rgba(0, 0, 0, 0.4);
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    border-top-width: 0.75mm;
+    border-right-color: rgba(0, 0, 0, 0.15);
+    border-bottom: 1.125mm rgba(0, 0, 0, 0.3);
+    border-left-color: rgba(255, 255, 255, 0.25);
+    border-radius: 44px;
+    font-size: 28px;
+    font-family: Oswald, sans-serif;
+`
+
+export const HintDiv = styled(ScoreDiv)`
+  text-align: center;
+  margin-top: 50px;
+  color: green;
+  cursor: pointer;
+`

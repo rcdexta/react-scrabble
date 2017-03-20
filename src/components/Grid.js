@@ -1,17 +1,22 @@
 import React, {Component} from 'react'
-import {GridDiv} from '../styles/Grid'
+import {GridDiv, BoardLayout, RightPane} from '../styles/Grid'
+import {RackTile} from '../styles/Board'
 import {data} from './data'
 import Tile from './Tile'
 import update from 'immutability-helper';
+import Score from './Score'
+import Hint from './Hint'
 
-const givenWords = ['DISPLACEMENT', 'FORCE']
+
+const givenWords = ['FAR', 'PERIODIC', 'PARALLAX', 'KILOMETRE', 'TIME', 'RANDOM', 'MOTION', 'REST', 'TRUCK', 'INCH', 'MEASURE']
 
 export default class Grid extends Component {
 
   state = {
     curSelectionPos: [],
     curSelectionLetters: [],
-    completedSelectionPos: []
+    completedSelectionPos: [],
+    completedWords: 0
   }
 
   sameRow = (selection, row) => {
@@ -53,6 +58,9 @@ export default class Grid extends Component {
           curSelectionLetters: {$set: []},
           completedSelectionPos: {
             $push: curSelectionPos
+          },
+          completedWords: {
+            $set: this.state.completedWords + 1
           }
         }))
     }
@@ -80,25 +88,32 @@ export default class Grid extends Component {
   }
 
   render() {
-    return <GridDiv>
-      {
-        data.map((row, i) => {
-          return row.line.split('').map((letter, j) => {
-            const id = `${i}${j}`
-            const selected = this.state.curSelectionPos.some((sel) => sel.row === i && sel.col === j)
-            const completed = this.state.completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
-            return <Tile id={id}
-                         key={id}
-                         letter={letter}
-                         selected={selected}
-                         completed={completed}
-                         row={i}
-                         col={j}
-                         notifySelect={this.handleSelect}
-            />
+    const score = `${this.state.completedWords}/8`
+    return <BoardLayout>
+      <GridDiv>
+        {
+          data.map((row, i) => {
+            return row.line.split('').map((letter, j) => {
+              const id = `${i}${j}`
+              const selected = this.state.curSelectionPos.some((sel) => sel.row === i && sel.col === j)
+              const completed = this.state.completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
+              return <Tile id={id}
+                           key={id}
+                           letter={letter}
+                           selected={selected}
+                           completed={completed}
+                           row={i}
+                           col={j}
+                           notifySelect={this.handleSelect}
+              />
+            })
           })
-        })
-      }
-    </GridDiv>
+        }
+      </GridDiv>
+      <RightPane>
+        <Score value={score} />
+        <Hint hint='8 letter word, your timetable has this'/>
+      </RightPane>
+      </BoardLayout>
   }
 }

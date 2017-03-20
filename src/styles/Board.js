@@ -1,10 +1,10 @@
+import React from 'react'
 import styled from 'styled-components'
 import { injectGlobal } from 'styled-components'
 
 injectGlobal`
   @import url(http://fonts.googleapis.com/css?family=Oswald);
 `
-
 export const BoardDiv = styled.div`
   padding: 5vh 5vw;
   background-color: #e6c998;
@@ -13,18 +13,8 @@ export const BoardDiv = styled.div`
   background-image: -webkit-radial-gradient(center, #7c6f59, transparent);
   background-image: radial-gradient(center, #7c6f59, transparent);
 
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
   align-items: center;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-  -ms-flex-direction: column;
   flex-direction: column;
   height: 100vh;
   width: 100vw;
@@ -67,63 +57,5 @@ export const RackTile = styled.div`
     transform: translate(-50%, -50%);
     color: rgba(0, 0, 0, 0.6);
     text-shadow: 4px 4px 6px #f5cf90, 0 0 0 rgba(0, 0, 0, 0.7), 1px 2px 1px rgba(255, 255, 255, 0.5);
-  }
-
-  &[data-letter]::after {
-    color: rgba(0, 0, 0, 0.7);
-    font-family: sans-serif;
-    font-size: 4.275mm;
-    position: absolute;
-    right: 12.5%;
-    bottom: 16.5%;
-    -webkit-transform: translate(50%, 50%);
-    transform: translate(50%, 50%);
-  }
-  
-  &[data-letter='e']::after,
-  &[data-letter='a']::after,
-  &[data-letter='i']::after,
-  &[data-letter='o']::after,
-  &[data-letter='n']::after,
-  &[data-letter='r']::after,
-  &[data-letter='t']::after,
-  &[data-letter='l']::after,
-  &[data-letter='s']::after,
-  &[data-letter='u']::after {
-    content: "1";
-  }
-  
-  &[data-letter='d']::after,
-  &[data-letter='g']::after {
-    content: "2";
-  }
-  
-  &[data-letter='b']::after,
-  &[data-letter='c']::after,
-  &[data-letter='m']::after,
-  &[data-letter='p']::after {
-    content: "3";
-  }
-  
-  &[data-letter='f']::after,
-  &[data-letter='h']::after,
-  &[data-letter='v']::after,
-  &[data-letter='w']::after,
-  &[data-letter='y']::after {
-    content: "4";
-  }
-  
-  &[data-letter='k']::after {
-    content: "5";
-  }
-  
-  &[data-letter='j']::after,
-  &[data-letter='x']::after {
-    content: "8";
-  }
-  
-  &[data-letter='q']::after,
-  &[data-letter='z']::after {
-    content: "10";
   }
 `

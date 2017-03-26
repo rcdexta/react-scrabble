@@ -25,7 +25,9 @@ export const TileDiv = styled.div`
   border-right-color: rgba(0, 0, 0, 0.15);
   border-bottom: 0.5625mm rgba(0, 0, 0, 0.3);
   border-left-color: rgba(255, 255, 255, 0.25);
+  color: rgba(0, 0, 0, 0.6);
   border-radius: 0.375mm;
+  text-shadow: 4px 4px 6px #f5cf90, 0 0 0 rgba(0, 0, 0, 0.7), 1px 2px 1px rgba(255, 255, 255, 0.5);
   
   &[data-letter]::before {
     content: attr(data-letter);
@@ -33,12 +35,9 @@ export const TileDiv = styled.div`
     font-family: Oswald, sans-serif;
     font-size: 6.65mm;
     position: absolute;
-    top: 50%;
+    top: 47%;
     left: 50%;
-    -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
-    color: rgba(0, 0, 0, 0.6);
-    text-shadow: 4px 4px 6px #f5cf90, 0 0 0 rgba(0, 0, 0, 0.7), 1px 2px 1px rgba(255, 255, 255, 0.5);
   }
   
   &[data-letter]::after {
@@ -47,7 +46,7 @@ export const TileDiv = styled.div`
     font-size: 2.1375mm;
     position: absolute;
     right: 12.5%;
-    bottom: 12.5%;
+    bottom: 15%;
     -webkit-transform: translate(50%, 50%);
     transform: translate(50%, 50%);
   }
@@ -129,23 +128,32 @@ export const RightPane = styled.div`
   margin-left: 10mm;
   margin-top: 20mm;
 `
-export const ScoreDiv = styled.div`
-    padding: 23px;
+const userElementBaseDiv = styled.div`
+  width: 72px;
+  height: 72px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  border-radius: 50%;
+  font-size: 28px;
+  font-family: Oswald, sans-serif;
+`
+
+export const ScoreDiv = styled(userElementBaseDiv)`
     background: linear-gradient(to bottom, #ebd19a 0%,#e3c083 100%);
-    box-shadow: 0 1.125mm 0.75mm -0.5mm rgba(0, 0, 0, 0.4);
     border: 1px solid rgba(255, 255, 255, 0.45);
     border-top-width: 0.75mm;
     border-right-color: rgba(0, 0, 0, 0.15);
     border-bottom: 1.125mm rgba(0, 0, 0, 0.3);
     border-left-color: rgba(255, 255, 255, 0.25);
-    border-radius: 44px;
-    font-size: 28px;
-    font-family: Oswald, sans-serif;
 `
 
-export const HintDiv = styled(ScoreDiv)`
+
+export const HintIcon = styled(userElementBaseDiv)`
   text-align: center;
+  padding: 0px;
   margin-top: 50px;
   color: green;
   cursor: pointer;
+  font-size: 120%;
 `

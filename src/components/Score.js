@@ -1,12 +1,18 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {ScoreDiv} from '../styles/Grid'
 
 export default class Score extends Component {
 
   render() {
+    const {score, total} = this.props
     return <ScoreDiv>
-      {this.props.value}
+      {score}/{total}
     </ScoreDiv>
   }
 
+}
+
+Score.PropTypes = {
+  score: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired
 }

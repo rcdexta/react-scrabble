@@ -1,14 +1,11 @@
 import React, {Component} from 'react'
 import {GridDiv, BoardLayout, RightPane} from '../styles/Grid'
-import {RackTile} from '../styles/Board'
 import {data} from './data'
 import Tile from './Tile'
 import update from 'immutability-helper';
 import Score from './Score'
 import Hint from './Hint'
-
-
-const givenWords = ['FAR', 'PERIODIC', 'PARALLAX', 'KILOMETRE', 'TIME', 'RANDOM', 'MOTION', 'REST', 'TRUCK', 'INCH', 'MEASURE']
+import {allWords} from '../helpers/word_manager'
 
 export default class Grid extends Component {
 
@@ -16,7 +13,7 @@ export default class Grid extends Component {
     curSelectionPos: [],
     curSelectionLetters: [],
     completedSelectionPos: [],
-    completedWords: 0
+    completedWords: []
   }
 
   sameRow = (selection, row) => {
@@ -36,6 +33,10 @@ export default class Grid extends Component {
     return true
   }
 
+  get words() {
+    return allWords.map((w) => w.word)
+  }
+
   adjacentColumn = (selection, newCol) => {
     const selectedCols = selection.map((s) => s.col)
     selectedCols.push(newCol)
@@ -51,7 +52,7 @@ export default class Grid extends Component {
   checkIfWordCompleted = () => {
     const {curSelectionPos, curSelectionLetters} = this.state
     const currentWord = curSelectionLetters.join('')
-    if (givenWords.some((w) => w === currentWord)) {
+    if (this.words.some((w) => w === currentWord)) {
       this.setState(update(this.state,
         {
           curSelectionPos: {$set: []},
@@ -60,7 +61,7 @@ export default class Grid extends Component {
             $push: curSelectionPos
           },
           completedWords: {
-            $set: this.state.completedWords + 1
+            $push: [currentWord]
           }
         }))
     }
@@ -88,7 +89,7 @@ export default class Grid extends Component {
   }
 
   render() {
-    const score = `${this.state.completedWords}/8`
+    const {completedWords} = this.state
     return <BoardLayout>
       <GridDiv>
         {
@@ -111,8 +112,8 @@ export default class Grid extends Component {
         }
       </GridDiv>
       <RightPane>
-        <Score value={score} />
-        <Hint hint='8 letter word, your timetable has this'/>
+        <Score score={completedWords.length} total={this.words.length}/>
+        <Hint allWords={allWords} completedWords={completedWords}/>
       </RightPane>
       </BoardLayout>
   }

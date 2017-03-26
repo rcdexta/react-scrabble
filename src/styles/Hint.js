@@ -16,7 +16,7 @@ export const PopupDiv = styled.div`
   padding: 20px;
   background: #fff;
   border-radius: 5px;
-  width: 30%;
+  width: 50%;
   position: relative;
   transition: all 5s ease-in-out;
   
@@ -39,4 +39,10 @@ export const CloseButton = styled.a`
     &:hover {
     color: #06D85F;
   }
+`
+
+export const HintItem = styled.div`
+  margin: 10px 0px;
+  border-bottom: 1px solid #dcd9d9;
+  padding-bottom: 7px;
 `

@@ -11,8 +11,8 @@ export default class Tile extends Component {
     const {letter} = this.props
     let customStyle = this.props.selected ? {background: '#ff4500'} : {}
     customStyle = this.props.completed ? {
-        background: '#FFFF8B', boxShadow: '0px 0px 8px 2px #ffebcd',
-        animation: 'greenPulse 1s 1', textDecoration: 'strike-through'
+        background: 'ff4500', boxShadow: '0px 0px 8px 2px #ffebcd',
+        animation: 'greenPulse 1s 1', color: '#ffdb1a', textShadow: 'none'
       } : customStyle
     return <TileDiv key={this.props.id} data-letter={letter} style={customStyle} onClick={this.onSelect}/>
   }

@@ -2,6 +2,28 @@
 
 > The familiar scrabble word game written in React.js
 
+## Usage
+
+The data should be of the following form
+
+```javascript
+const data = [
+  {
+    word: 'FAR',
+    hint: '3 letter word that means not so close'
+  },
+  {
+    word: 'PERIODIC',
+    hint: '8 letter word, your timetable has this'
+  }
+]
+```
+You can initialise the board by passing the data props
+
+```javascript
+<Board data={data}/>
+```
+
 ## Development
 
 1. Getting started

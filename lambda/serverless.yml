@@ -1,0 +1,77 @@
+service: scrabble-lambda
+
+plugins:
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs4.3
+  region: us-west-2
+  cfLogs: true
+  stage: prod
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - s3:ListBucket
+      Resource: "arn:aws:s3:::react-scrabble"
+    - Effect: Allow
+      Action:
+        - s3:PutObject
+        - s3:GetObject
+        - s3:DeleteObject
+      Resource: "arn:aws:s3:::react-scrabble/*"
+
+functions:
+  create:
+    handler: handler.create
+    events:
+      - http:
+          path: react-scrabble/{id}
+          method: post
+          cors: true
+  list:
+    handler: handler.list
+    events:
+      - http:
+          path: react-scrabble
+          method: get
+          cors: true
+  readAll:
+    handler: handler.readAll
+    events:
+      - http:
+          path: react-scrabble/readAll
+          method: get
+          cors: true
+  readOne:
+    handler: handler.readOne
+    events:
+      - http:
+          path: react-scrabble/{id}
+          method: get
+          cors: true
+  update:
+    handler: handler.update
+    events:
+      - http:
+          path: react-scrabble/{id}
+          method: put
+          cors: true
+  delete:
+    handler: handler.delete
+    events:
+      - http:
+          path: react-scrabble/{id}
+          method: delete
+          cors: true
+
+resources:
+  Resources:
+    MyBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: react-scrabble
+        AccessControl: PublicReadWrite
+        WebsiteConfiguration:
+          IndexDocument: index.html
+          ErrorDocument: error.html

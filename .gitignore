@@ -8,3 +8,13 @@ coverage
 examples/bundle.js
 examples/style.css
 npm-debug.log
+
+
+lambda/.serverless
+lambda/npm-debug.*
+lambda/dist
+lambda/node_modules
+.DS_Store
+.tmp
+.env
+lambda/data/form-response/*

@@ -1,15 +1,15 @@
 import React, {Component} from 'react'
 import {GridDiv, BoardLayout, RightPane} from '../styles/Grid'
-import {data} from './data'
 import Tile from './Tile'
 import update from 'immutability-helper';
 import Score from './Score'
 import Hint from './Hint'
-import {allWords} from '../helpers/word_manager'
+import Generator from '../helpers/generator'
 
 export default class Grid extends Component {
 
   state = {
+    grid: undefined,
     curSelectionPos: [],
     curSelectionLetters: [],
     completedSelectionPos: [],
@@ -18,6 +18,11 @@ export default class Grid extends Component {
 
   sameRow = (selection, row) => {
     return selection.every((s) => s.row === row)
+  }
+
+  componentWillMount() {
+    const matrix = Generator.generateGrid(this.words);
+    this.setState({grid: matrix})
   }
 
   sameCol = (selection, col) => {
@@ -34,7 +39,7 @@ export default class Grid extends Component {
   }
 
   get words() {
-    return allWords.map((w) => w.word)
+    return this.props.data.map((w) => w.word)
   }
 
   adjacentColumn = (selection, newCol) => {
@@ -89,12 +94,12 @@ export default class Grid extends Component {
   }
 
   render() {
-    const {completedWords} = this.state
+    const {completedWords, grid} = this.state
     return <BoardLayout>
       <GridDiv>
         {
-          data.map((row, i) => {
-            return row.line.split('').map((letter, j) => {
+          grid && grid.map((row, i) => {
+            return row.map((letter, j) => {
               const id = `${i}${j}`
               const selected = this.state.curSelectionPos.some((sel) => sel.row === i && sel.col === j)
               const completed = this.state.completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
@@ -113,7 +118,7 @@ export default class Grid extends Component {
       </GridDiv>
       <RightPane>
         <Score score={completedWords.length} total={this.words.length}/>
-        <Hint allWords={allWords} completedWords={completedWords}/>
+        <Hint allWords={this.props.data} completedWords={completedWords}/>
       </RightPane>
       </BoardLayout>
   }

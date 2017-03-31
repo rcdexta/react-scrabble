@@ -8,7 +8,7 @@ export default class Board extends Component {
   render() {
     return <BoardDiv>
       <Title text='scrabble'/>
-      <Grid/>
+      <Grid data={this.props.data}/>
     </BoardDiv>
   }
 

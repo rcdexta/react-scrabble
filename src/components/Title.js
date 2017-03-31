@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {BoardDiv, RackDiv, RackTile} from '../styles/Board'
 
-export const Title = ({text}) => (
+const Title = ({text}) => (
   <RackDiv>
     {
       text.split('').map((letter, idx) => (
@@ -10,3 +10,5 @@ export const Title = ({text}) => (
     }
   </RackDiv>
 )
+
+export default Title

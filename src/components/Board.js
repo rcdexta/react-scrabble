@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {BoardDiv, RackDiv, RackTile} from '../styles/Board'
 import Grid from './Grid'
-import {Title} from './Title'
+import Title from './Title'
 
 export default class Board extends Component {
 

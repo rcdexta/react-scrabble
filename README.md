@@ -2,6 +2,10 @@
 
 > The familiar scrabble word game written in React.js
 
+
+[![Build Status](https://travis-ci.org/rcdexta/react-scrabble.svg?branch=master)](https://travis-ci.org/rcdexta/react-scrabble)
+[![npm version](https://badge.fury.io/js/react-scrabble.svg)](https://badge.fury.io/js/react-scrabble)
+
 ## Usage
 
 The data should be of the following form

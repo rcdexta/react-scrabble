@@ -25,7 +25,14 @@ const data = [
 You can initialise the board by passing the data props
 
 ```javascript
-<Board data={data}/>
+import {Board} from 'react-scrabble'
+class App extends Component {
+  render() {
+    return (
+      <Board data={data}/>
+    );
+  }
+}r
 ```
 
 ## Development

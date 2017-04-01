@@ -1,11 +1,12 @@
 import React, {Component, PropTypes} from 'react'
-import {GridDiv, BoardLayout, RightPane} from '../styles/Grid'
+import {GridDiv, BoardLayout, RightPane, CounterDiv} from '../styles/Grid'
 import Tile from './Tile'
 import update from 'immutability-helper';
 import Score from './Score'
 import Hint from './Hint'
 import FinalPopup from './FinalPopup'
 import Generator from '../helpers/generator'
+import ReactCountdownClock from 'react-countdown-clock'
 
 export default class Grid extends Component {
 
@@ -62,7 +63,7 @@ export default class Grid extends Component {
   }
 
   hasCompleted = () => {
-    return true //this.state.completedWords.length === this.words.length
+    return this.state.completedWords.length === this.words.length
   }
 
   checkIfPlayerWon = () => {
@@ -71,13 +72,19 @@ export default class Grid extends Component {
     }
   }
 
+  timeup = () => {
+    this.props.updateStats(this.stats())
+    this.setState({showFinalPopup: true})
+  }
+
   stats = () => {
-    const {completedWords, hintsTaken, startedAt, completedAt} = this.state
+    const {completedWords, hintsTaken, startedAt} = this.state
     const stats = {
       completed: this.hasCompleted(),
       score: completedWords.length,
       totalScore: this.words.length,
-      ...{hintsTaken, startedAt, completedAt}
+      completedAt: new Date(),
+      ...{hintsTaken, startedAt}
     }
     return stats
   }
@@ -151,6 +158,15 @@ export default class Grid extends Component {
         <Score score={completedWords.length} total={this.words.length}/>
         <Hint allWords={this.props.data} completedWords={completedWords} opened={this.requestedHint}/>
         <FinalPopup show={this.state.showFinalPopup} completed={this.hasCompleted()} onExit={this.props.onExit}/>
+        <CounterDiv>
+          <ReactCountdownClock seconds={300}
+                               color="ivory"
+                               alpha={0.9}
+                               size={85}
+                               weight={10}
+                               onComplete={this.timeup}/>
+        </CounterDiv>
+
       </RightPane>
     </BoardLayout>
   }

@@ -1,6 +1,7 @@
 import React, {Component, PropTypes} from 'react'
 import {OverlayDiv, PopupDiv, FinalMascot, GameButton} from '../styles/Board'
-import {PandaSuccessImg} from '../images/sucess-panda-png'
+import {PandaSuccessImg} from '../images/success-panda-png'
+import {NiceTryPandaImg} from '../images/try-panda-png'
 
 export default class FinalPopup extends Component {
 
@@ -8,7 +9,7 @@ export default class FinalPopup extends Component {
     if (this.props.completed) {
       return <FinalMascot src={PandaSuccessImg}/>
     } else {
-      return <FinalMascot src={PandaSuccessImg}/>
+      return <FinalMascot src={NiceTryPandaImg}/>
     }
   }
 
@@ -19,7 +20,7 @@ export default class FinalPopup extends Component {
           <div className="content">
             {this.content()}
             <div>
-              <GameButton onClick={this.props.onExit}>DONE</GameButton>
+              <GameButton onClick={this.props.onExit}>TAKE ME BACK</GameButton>
             </div>
           </div>
         </PopupDiv>

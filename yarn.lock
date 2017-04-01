@@ -5594,6 +5594,10 @@ react-color@^2.4.3:
     reactcss "^1.1.1"
     tinycolor2 "^1.1.2"
 
+react-countdown-clock@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-countdown-clock/-/react-countdown-clock-1.1.0.tgz#a2ff686cab1ceb36fd5291136726bdc6f4c69043"
+
 react-datetime@^2.6.0:
   version "2.8.1"
   resolved "https://registry.yarnpkg.com/react-datetime/-/react-datetime-2.8.1.tgz#cfc4b42a96e373927f426839bcf07adb3cb3a946"

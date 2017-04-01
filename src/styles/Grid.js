@@ -129,8 +129,8 @@ export const RightPane = styled.div`
   margin-top: 20mm;
 `
 const userElementBaseDiv = styled.div`
-  width: 65px;
-  height: 65px;
+  width: 85px;
+  height: 85px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -152,4 +152,8 @@ export const HintIcon = styled(userElementBaseDiv)`
   color: green;
   cursor: pointer;
   font-size: 120%;
+`
+
+export const CounterDiv = styled.div`
+  margin-top: 50px;
 `

@@ -18,7 +18,7 @@ export default class Hint extends Component {
 
   render() {
     return <HintIcon >
-      <img src={IdeaImg} onClick={this.onHint} style={{width: 64, height: 64}}/>
+      <img src={IdeaImg} onClick={this.onHint} style={{width: 85, height: 85}}/>
       {
         this.state.show &&
         <OverlayDiv>

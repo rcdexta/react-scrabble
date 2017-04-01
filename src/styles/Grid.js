@@ -129,8 +129,8 @@ export const RightPane = styled.div`
   margin-top: 20mm;
 `
 const userElementBaseDiv = styled.div`
-  width: 72px;
-  height: 72px;
+  width: 65px;
+  height: 65px;
   display:flex;
   justify-content:center;
   align-items:center;
@@ -141,11 +141,7 @@ const userElementBaseDiv = styled.div`
 
 export const ScoreDiv = styled(userElementBaseDiv)`
     background: linear-gradient(to bottom, #ebd19a 0%,#e3c083 100%);
-    border: 1px solid rgba(255, 255, 255, 0.45);
-    border-top-width: 0.75mm;
-    border-right-color: rgba(0, 0, 0, 0.15);
-    border-bottom: 1.125mm rgba(0, 0, 0, 0.3);
-    border-left-color: rgba(255, 255, 255, 0.25);
+    border: 2px solid #58462e;
 `
 
 

@@ -1,19 +1,22 @@
-import React, {Component} from 'react'
+import React, {Component, PropTypes} from 'react'
 import {GridDiv, BoardLayout, RightPane} from '../styles/Grid'
 import Tile from './Tile'
 import update from 'immutability-helper';
 import Score from './Score'
 import Hint from './Hint'
+import FinalPopup from './FinalPopup'
 import Generator from '../helpers/generator'
 
 export default class Grid extends Component {
 
   state = {
+    showFinalPopup: false,
     grid: undefined,
     curSelectionPos: [],
     curSelectionLetters: [],
     completedSelectionPos: [],
-    completedWords: []
+    completedWords: [],
+    hintsTaken: 0
   }
 
   sameRow = (selection, row) => {
@@ -22,7 +25,7 @@ export default class Grid extends Component {
 
   componentWillMount() {
     const matrix = Generator.generateGrid(this.words);
-    this.setState({grid: matrix})
+    this.setState({grid: matrix, startedAt: new Date()})
   }
 
   sameCol = (selection, col) => {
@@ -54,6 +57,31 @@ export default class Grid extends Component {
     return this.areAdjacentTiles(selectedRows)
   }
 
+  requestedHint = () => {
+    this.setState({hintsTaken: this.state.hintsTaken + 1})
+  }
+
+  hasCompleted = () => {
+    return true //this.state.completedWords.length === this.words.length
+  }
+
+  checkIfPlayerWon = () => {
+    if (this.hasCompleted()) {
+      this.setState({showFinalPopup: true})
+    }
+  }
+
+  stats = () => {
+    const {completedWords, hintsTaken, startedAt, completedAt} = this.state
+    const stats = {
+      completed: this.hasCompleted(),
+      score: completedWords.length,
+      totalScore: this.words.length,
+      ...{hintsTaken, startedAt, completedAt}
+    }
+    return stats
+  }
+
   checkIfWordCompleted = () => {
     const {curSelectionPos, curSelectionLetters} = this.state
     const currentWord = curSelectionLetters.join('')
@@ -68,7 +96,10 @@ export default class Grid extends Component {
           completedWords: {
             $push: [currentWord]
           }
-        }))
+        }), () => {
+        this.props.updateStats(this.stats())
+        this.checkIfPlayerWon()
+      })
     }
   }
 
@@ -118,8 +149,15 @@ export default class Grid extends Component {
       </GridDiv>
       <RightPane>
         <Score score={completedWords.length} total={this.words.length}/>
-        <Hint allWords={this.props.data} completedWords={completedWords}/>
+        <Hint allWords={this.props.data} completedWords={completedWords} opened={this.requestedHint}/>
+        <FinalPopup show={this.state.showFinalPopup} completed={this.hasCompleted()} onExit={this.props.onExit}/>
       </RightPane>
-      </BoardLayout>
+    </BoardLayout>
   }
+}
+
+Grid.PropTypes = {
+  data: PropTypes.array.isRequired,
+  updateStats: PropTypes.func,
+  onExit: PropTypes.func
 }

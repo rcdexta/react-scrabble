@@ -8,6 +8,7 @@ export default class Hint extends Component {
   state = {show: false}
 
   onHint = () => {
+    this.props.opened()
     this.setState({show: true})
   }
 
@@ -16,20 +17,22 @@ export default class Hint extends Component {
   }
 
   render() {
-    const showStyle = this.state.show ? {opacity: 1, visibility: 'visible'} : {visibility: 'hidden', opacity: 0}
-    return <HintIcon>
+    return <HintIcon >
       <img src={IdeaImg} onClick={this.onHint} style={{width: 64, height: 64}}/>
-      <OverlayDiv style={showStyle}>
-        <PopupDiv>
-          <CloseButton onClick={this.onClose}>&times;</CloseButton>
-          <div className="content">
-            {this.props.allWords.map((entry) => {
-              const itemStyle = this.props.completedWords.includes(entry.word) ? {textDecoration: 'line-through'} : {}
-              return <HintItem key={entry.word} style={itemStyle}>{entry.hint}</HintItem>
-            })}
-          </div>
-        </PopupDiv>
-      </OverlayDiv>
+      {
+        this.state.show &&
+        <OverlayDiv>
+          <PopupDiv>
+            <CloseButton onClick={this.onClose}>&times;</CloseButton>
+            <div className="content">
+              {this.props.allWords.map((entry) => {
+                const itemStyle = this.props.completedWords.includes(entry.word) ? {textDecoration: 'line-through'} : {}
+                return <HintItem key={entry.word} style={itemStyle}>{entry.hint}</HintItem>
+              })}
+            </div>
+          </PopupDiv>
+        </OverlayDiv>
+      }
     </HintIcon>
   }
 
@@ -37,5 +40,6 @@ export default class Hint extends Component {
 
 Hint.PropTypes = {
   allWords: PropTypes.array.isRequired,
-  completedWords: PropTypes.array.isRequired
+  completedWords: PropTypes.array.isRequired,
+  opened: PropTypes.func
 }

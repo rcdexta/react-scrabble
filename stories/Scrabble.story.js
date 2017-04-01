@@ -50,7 +50,16 @@ export const data = [
   }
 ]
 
+function updateStats(stats) {
+  console.log('New Stats')
+  console.log(stats)
+}
+
+function handleExit() {
+  console.log('game over')
+}
+
 storiesOf('react-scrabble', module)
   .add('default', () => {
-    return <Board data={data}/>
+    return <Board data={data} updateStats={updateStats} onExit={handleExit}/>
   });

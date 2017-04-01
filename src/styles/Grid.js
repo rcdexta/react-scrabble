@@ -26,7 +26,7 @@ export const TileDiv = styled.div`
   border-bottom: 0.5625mm rgba(0, 0, 0, 0.3);
   border-left-color: rgba(255, 255, 255, 0.25);
   color: rgba(0, 0, 0, 0.6);
-  border-radius: 0.375mm;
+  border-radius: 0.975mm;
   text-shadow: 4px 4px 6px #f5cf90, 0 0 0 rgba(0, 0, 0, 0.7), 1px 2px 1px rgba(255, 255, 255, 0.5);
   
   &[data-letter]::before {

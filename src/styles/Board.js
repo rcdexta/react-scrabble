@@ -43,7 +43,7 @@ export const RackTile = styled.div`
   border-right-color: rgba(0, 0, 0, 0.15);
   border-bottom: 1.125mm rgba(0, 0, 0, 0.3);
   border-left-color: rgba(255, 255, 255, 0.25);
-  border-radius: 0.75mm;
+  border-radius: 1.55mm;
   
   &[data-letter]::before {
     content: attr(data-letter);

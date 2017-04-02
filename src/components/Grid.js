@@ -24,9 +24,14 @@ export default class Grid extends Component {
     return selection.every((s) => s.row === row)
   }
 
+  formattedCurrentTime = () => {
+    const date = new Date()
+    return new Date(date.getTime() - (date.getTimezoneOffset() * 60000)).toJSON();
+  }
+
   componentWillMount() {
     const matrix = Generator.generateGrid(this.words);
-    this.setState({grid: matrix, startedAt: new Date()})
+    this.setState({grid: matrix, startedAt: this.formattedCurrentTime()})
   }
 
   sameCol = (selection, col) => {
@@ -82,9 +87,10 @@ export default class Grid extends Component {
     const stats = {
       completed: this.hasCompleted(),
       score: completedWords.length,
-      totalScore: this.words.length,
-      completedAt: new Date(),
-      ...{hintsTaken, startedAt}
+      started_at: startedAt,
+      total_score: this.words.length,
+      ended_at: this.formattedCurrentTime(),
+      metadata: {hints_taken: hintsTaken}
     }
     return stats
   }

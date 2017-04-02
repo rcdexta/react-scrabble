@@ -6,9 +6,10 @@ import Title from './Title'
 export default class Board extends Component {
 
   render() {
-    return <BoardDiv>
+    const {style, ...otherProps} = this.props
+    return <BoardDiv style={style}>
       <Title text='scrabble'/>
-      <Grid {...this.props}/>
+      <Grid {...otherProps}/>
     </BoardDiv>
   }
 

@@ -6,7 +6,7 @@ import {Board} from '../src';
 export const data = [
   {
     word: 'FAR',
-    hint: '3 letter word that means not so close'
+    hint: '_ _ R : that means not so close'
   },
   {
     word: 'PERIODIC',

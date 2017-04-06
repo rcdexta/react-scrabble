@@ -2,7 +2,7 @@ let matrix = null;
 let placeHolder = '-1'
 
 function defineMatrix(n) {
-  var matrix = [];
+  let matrix = [];
   for (let i = 0; i < n; i++) {
     matrix[i] = new Array();
     for (let j = 0; j < n; j++) {
@@ -13,24 +13,24 @@ function defineMatrix(n) {
 }
 
 function fillWordAcrossRow(rowNum, startingPoint, word) {
-  var wordArray = word.split('')
+  let wordArray = word.split('')
   for (let i = startingPoint, j = 0; i < word.length + startingPoint; i++, j++) {
     matrix[rowNum][i] = wordArray[j];
   }
 }
 
 function fillWordAcrossColumn(columnNum, startingPoint, word) {
-  var wordArray = word.split('')
+  let wordArray = word.split('')
   for (let i = startingPoint, j = 0; i < word.length + startingPoint; i++, j++) {
     matrix[i][columnNum] = wordArray[j];
   }
 }
 
 function findCellsForRow(word, rowNum) {
-  var len = matrix.length
-  var maxStartingPoint = len - word.length;
+  let len = matrix.length
+  let maxStartingPoint = len - word.length;
   for (let x = 1; x <= 3; x++) {
-    var startingPoint = randomTill(maxStartingPoint)
+    let startingPoint = randomTill(maxStartingPoint)
     let canBeAllotted = true;
     for (let i = startingPoint; i < word.length + startingPoint; i++) {
       if (matrix[rowNum][i] != placeHolder) {
@@ -46,10 +46,10 @@ function findCellsForRow(word, rowNum) {
   return false;
 }
 function findCellsForColumn(word, columnNum) {
-  var len = matrix.length
-  var maxStartingPoint = len - word.length;
+  let len = matrix.length
+  let maxStartingPoint = len - word.length;
   for (let x = 1; x <= 10; x++) {
-    var startingPoint = randomTill(maxStartingPoint)
+    let startingPoint = randomTill(maxStartingPoint)
     let canBeAllotted = true;
     for (let i = startingPoint; i < word.length + startingPoint; i++) {
       if (matrix[i][columnNum] != placeHolder) {
@@ -66,7 +66,7 @@ function findCellsForColumn(word, columnNum) {
 }
 
 function findCells(word, pos, direction) {
-  if (direction == 'row') {
+  if (direction == 'across') {
     return findCellsForRow(word, pos)
   }
   else {
@@ -79,7 +79,7 @@ function randomTill(n) {
 }
 
 function fillRandomAlphabets(n) {
-  var alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  let alphabets = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
   for (let i = 0; i < n; i++) {
     for (let j = 0; j < n; j++) {
       if (matrix[i][j] === placeHolder) {
@@ -89,26 +89,40 @@ function fillRandomAlphabets(n) {
   }
 }
 
+function randomDirection() {
+  const direction = ['across', 'down']
+  return direction[Math.floor(Math.random() * direction.length)]
+}
+
+function otherDirection(curDirection) {
+  return curDirection === 'across' ? 'down' : 'across'
+}
+
 module.exports = {
+
   generateGrid: (words) => {
-    let n = 14;
+    const n = 14;
     matrix = defineMatrix(n)
     words.sort((w1, w2) => w2.length - w1.length)
-    console.log(words)
 
-    var direction = ['row', 'col']
+    const hintDirection = {across: [], down: []}
+
     for (let i = 0; i < words.length; i++) {
       let word = words[i]
-      var isAllocated = findCells(word, i, direction[i % 2]);
+      let direction = randomDirection()
+      let isAllocated = findCells(word, i, direction);
+      isAllocated && hintDirection[direction].push(word)
       if (!isAllocated) {
-        isAllocated = findCells(word, i, direction[(i + 1) % 2]);
+        let newDirection = otherDirection(direction)
+        isAllocated = findCells(word, i, newDirection);
+        isAllocated && hintDirection[newDirection].push(word)
       }
       if (!isAllocated) {
         console.error("Could not allot word: " + word)
       }
     }
     fillRandomAlphabets(n);
-    return matrix
+    return {matrix: matrix, hintDirection: hintDirection}
   }
 }
 

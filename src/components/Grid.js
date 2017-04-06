@@ -12,12 +12,11 @@ export default class Grid extends Component {
 
   state = {
     showFinalPopup: false,
-    grid: undefined,
     curSelectionPos: [],
     curSelectionLetters: [],
     completedSelectionPos: [],
     completedWords: [],
-    hintsTaken: 0
+    hintsTaken: 0,
   }
 
   sameRow = (selection, row) => {
@@ -30,8 +29,8 @@ export default class Grid extends Component {
   }
 
   componentWillMount() {
-    const matrix = Generator.generateGrid(this.words);
-    this.setState({grid: matrix, startedAt: this.formattedCurrentTime()})
+    const {matrix, hintDirection} = Generator.generateGrid(this.words);
+    this.setState({grid: matrix, hintDirection: hintDirection, startedAt: this.formattedCurrentTime()})
   }
 
   sameCol = (selection, col) => {
@@ -138,7 +137,7 @@ export default class Grid extends Component {
   }
 
   render() {
-    const {completedWords, grid} = this.state
+    const {completedWords, hintDirection, grid} = this.state
     return <BoardLayout>
       <GridDiv>
         {
@@ -162,10 +161,9 @@ export default class Grid extends Component {
       </GridDiv>
       <RightPane>
         <Score score={completedWords.length} total={this.words.length}/>
-        <Hint allWords={this.props.data} completedWords={completedWords} opened={this.requestedHint}/>
         <FinalPopup show={this.state.showFinalPopup} completed={this.hasCompleted()} onExit={this.props.onExit}/>
         <CounterDiv>
-          <ReactCountdownClock seconds={300}
+          <ReactCountdownClock seconds={600}
                                color="ivory"
                                alpha={0.9}
                                size={85}
@@ -173,6 +171,12 @@ export default class Grid extends Component {
                                onComplete={this.timeup}/>
         </CounterDiv>
 
+      </RightPane>
+      <RightPane>
+        <Hint allWords={this.props.data}
+              hintDirection={hintDirection}
+              completedWords={completedWords}
+              opened={this.requestedHint}/>
       </RightPane>
     </BoardLayout>
   }

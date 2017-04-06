@@ -1,39 +1,25 @@
 import React, {Component, PropTypes} from 'react'
-import {HintIcon} from '../styles/Grid'
-import {OverlayDiv, PopupDiv, CloseButton, HintContainerDiv, HintItem} from '../styles/Hint'
-import {IdeaImg} from '../images/idea-png'
+import {PopupDiv, HintItem} from '../styles/Hint'
 
 export default class Hint extends Component {
 
-  state = {show: false}
-
-  onHint = () => {
-    this.props.opened()
-    this.setState({show: true})
-  }
-
-  onClose = () => {
-    this.setState({show: false})
+  renderWords = (words) => {
+    return words.map((word) => {
+      const entry = this.props.allWords.find((w) => w.word === word)
+      const itemStyle = this.props.completedWords.includes(entry.word) ? {textDecoration: 'line-through'} : {}
+      return <HintItem key={entry.word} style={itemStyle}>{entry.hint}</HintItem>
+    })
   }
 
   render() {
-    return <HintIcon >
-      <img src={IdeaImg} onClick={this.onHint} style={{width: 85, height: 85}}/>
-      {
-        this.state.show &&
-        <OverlayDiv>
-          <PopupDiv>
-            <CloseButton onClick={this.onClose}>&times;</CloseButton>
-            <div className="content">
-              {this.props.allWords.map((entry) => {
-                const itemStyle = this.props.completedWords.includes(entry.word) ? {textDecoration: 'line-through'} : {}
-                return <HintItem key={entry.word} style={itemStyle}>{entry.hint}</HintItem>
-              })}
-            </div>
-          </PopupDiv>
-        </OverlayDiv>
-      }
-    </HintIcon>
+    return <PopupDiv>
+      <div className="content">
+        <h3>Across</h3>
+        {this.renderWords(this.props.hintDirection.across)}
+        <h3>Down</h3>
+        {this.renderWords(this.props.hintDirection.down)}
+      </div>
+    </PopupDiv>
   }
 
 }

@@ -20,7 +20,7 @@ export default class FinalPopup extends Component {
           <div className="content">
             {this.content()}
             <div>
-              <GameButton onClick={this.props.onExit}>TAKE ME BACK</GameButton>
+              <GameButton onClick={this.props.onExit}>BACK</GameButton>
             </div>
           </div>
         </PopupDiv>

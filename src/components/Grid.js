@@ -137,7 +137,7 @@ export default class Grid extends Component {
   }
 
   render() {
-    const {completedWords, hintDirection, grid} = this.state
+    const {completedWords, hintDirection, grid, showFinalPopup} = this.state
     return <BoardLayout>
       <GridDiv>
         {
@@ -161,16 +161,18 @@ export default class Grid extends Component {
       </GridDiv>
       <RightPane>
         <Score score={completedWords.length} total={this.words.length}/>
-        <FinalPopup show={this.state.showFinalPopup} completed={this.hasCompleted()} onExit={this.props.onExit}/>
-        <CounterDiv>
-          <ReactCountdownClock seconds={600}
-                               color="ivory"
-                               alpha={0.9}
-                               size={85}
-                               weight={10}
-                               onComplete={this.timeup}/>
-        </CounterDiv>
-
+        <FinalPopup show={showFinalPopup} completed={this.hasCompleted()} onExit={this.props.onExit}/>
+        {
+          !showFinalPopup &&
+              <CounterDiv>
+                <ReactCountdownClock seconds={600}
+                                     color="ivory"
+                                     alpha={0.9}
+                                     size={85}
+                                     weight={10}
+                                     onComplete={this.timeup}/>
+              </CounterDiv>
+        }
       </RightPane>
       <RightPane>
         <Hint allWords={this.props.data}

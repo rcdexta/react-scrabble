@@ -126,7 +126,7 @@ export const BoardLayout = styled.div`
 
 export const RightPane = styled.div`
   margin-left: 10mm;
-  margin-top: 20mm;
+  margin-top: 14mm;
 `
 const userElementBaseDiv = styled.div`
   width: 85px;
@@ -144,15 +144,6 @@ export const ScoreDiv = styled(userElementBaseDiv)`
     border: 2px solid #58462e;
 `
 
-
-export const HintIcon = styled(userElementBaseDiv)`
-  text-align: center;
-  padding: 0px;
-  margin-top: 50px;
-  color: green;
-  cursor: pointer;
-  font-size: 120%;
-`
 
 export const CounterDiv = styled.div`
   margin-top: 50px;

@@ -5,48 +5,48 @@ import {Board} from '../src';
 
 export const data = [
   {
-    word: 'FAR',
-    hint: '_ _ R : that means not so close'
+    word: 'PERIMETER',
+    hint: 'P_ _I_ _T_R : the continuous line forming the boundary of a closed shape, like square of circle'
   },
   {
-    word: 'PERIODIC',
-    hint: 'P_R_ _D_C : your timetable has this'
+    word: 'RAY',
+    hint: '_ _ _ : sun emits light ? which reaches us at earth. These travel in straight lines'
   },
   {
-    word: 'KILOMETRE',
-    hint: '_ _LO_ _TR_ : distance between two cities is represented by this word'
+    word: 'STRAIGHT',
+    hint: 'S_ _A_GH_ : A line is always ?'
   },
   {
-    word: 'TIME',
-    hint: '_ _ _ _ : waste this and you can never get it back'
+    word: 'LINE',
+    hint: '_ _ _ _ : A straight path joined by two points is called ?'
   },
   {
-    word: 'PARALLAX',
-    hint: '_ _R_LL_ _ : avoid this error to take measurements correctly'
+    word: 'PERPENDICULAR',
+    hint: 'P_ _P_ _ _I_ _ _ _R :  two lines that intersect at right angles are ? to each other'
   },
   {
-    word: 'RANDOM',
-    hint: '_ _ND_ _ :  never happens as we predict'
+    word: 'KILO',
+    hint: '_ _ _ _ :  1000 units of a standard unit is called ?'
   },
   {
-    word: 'MOTION',
-    hint: '_ _ _ _ _N : the act of movement or change in position of an object'
+    word: 'DECA',
+    hint: '_ _ C _ : 100 units of a standard unit is called ?'
   },
   {
-    word: 'REST',
-    hint: '_ES_ :  when it never moves'
+    word: 'DECI',
+    hint: '_ _ C _ :   1/100 of a unit is called ?'
   },
   {
-    word: 'TRUCK',
-    hint: '_ _U_K : can move goods from one city to another'
+    word: 'MILLI',
+    hint: '_ _ L _ _ : 1/10000 of a unit is called ?'
   },
   {
-    word: 'INCH',
-    hint: '_ _ _ _ : your height is mostly told in this'
+    word: 'HUNDRED',
+    hint: '_ _ N _ _ _ _ : A metre has these many centimetres'
   },
   {
-    word: 'MEASURE',
-    hint: 'M_ _S_ _ _ : the act of calculating the size or amount of something'
+    word: 'DIAMETER',
+    hint: '_ _ A _ _ T _ _ : the longest line in a circle is called ?'
   }
 ]
 

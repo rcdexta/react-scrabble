@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 
 export const GridDiv = styled.div`
-  margin-top: 12.5mm;
+  margin-top: 10.5mm;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -126,7 +126,7 @@ export const BoardLayout = styled.div`
 
 export const RightPane = styled.div`
   margin-left: 10mm;
-  margin-top: 14mm;
+  margin-top: 10.5mm;
 `
 const userElementBaseDiv = styled.div`
   width: 85px;

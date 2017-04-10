@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 
 export const HintContainer = styled.div`
-  width: 115mm;
+  width: 125mm;
   padding: 0px 20px;
   background-color: #f6e1a6;
 	background:-webkit-gradient(linear, 100% 100%, 0% 5%, from(#d8bd72), to(#fae1a6));
@@ -17,7 +17,7 @@ export const HintContainer = styled.div`
   }
 `
 export const HintItem = styled.div`
-  margin: 10px 0px;
+  margin: 5px 0px;
   border-bottom: 1px solid #ccaa7e;
   font-family: Oswald, sans-serif;
   padding-bottom: 7px;
@@ -27,11 +27,11 @@ export const HintItem = styled.div`
 
 export const Mask = styled.span`
   flex: initial;
-  width: 20%;
+  width: 30%;
 `
 
 export const Clue = styled.span`
-  width: 80%;
+  width: 70%;
 `
 
 export const TickMark = styled.span`
@@ -41,4 +41,9 @@ export const TickMark = styled.span`
 
 export const Found = styled.span`
   color: #FF4500;
+`
+
+export const Header = styled.h3`
+  font-family: Oswald, sans-serif;
+  margin: 15px 0px 5px 0px;
 `

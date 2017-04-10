@@ -16,7 +16,7 @@ export const FinalMascot = styled.img`
 `
 
 export const BoardDiv = styled.div`
-  padding: 5vh 5vw;
+  padding: 2vh 5vw;
   background-color: #e6c998;
   background-attachment: fixed;
   background-repeat: no-repeat;

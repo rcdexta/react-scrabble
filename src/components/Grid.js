@@ -165,7 +165,7 @@ export default class Grid extends Component {
         {
           !showFinalPopup &&
               <CounterDiv>
-                <ReactCountdownClock seconds={600}
+                <ReactCountdownClock seconds={this.props.duration}
                                      color="ivory"
                                      alpha={0.9}
                                      size={85}
@@ -187,5 +187,10 @@ export default class Grid extends Component {
 Grid.PropTypes = {
   data: PropTypes.array.isRequired,
   updateStats: PropTypes.func,
-  onExit: PropTypes.func
+  onExit: PropTypes.func,
+  duration: PropTypes.number
 }
+
+Grid.defaultProps = {
+  duration: 600
+};

@@ -61,5 +61,5 @@ function handleExit() {
 
 storiesOf('react-scrabble', module)
   .add('default', () => {
-    return <Board data={data} updateStats={updateStats} onExit={handleExit}/>
+    return <Board data={data} updateStats={updateStats} onExit={handleExit} duration={300}/>
   });

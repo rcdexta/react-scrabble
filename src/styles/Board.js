@@ -11,8 +11,22 @@ const rollInLeft = keyframes`
   100%{-webkit-transform:translateX(0) rotate(0deg);transform:translateX(0) rotate(0deg);opacity:1}}@keyframes roll-in-left{0%{-webkit-transform:translateX(-800px) rotate(-540deg);transform:translateX(-800px) rotate(-540deg);opacity:0}100%{-webkit-transform:translateX(0) rotate(0deg);transform:translateX(0) rotate(0deg);opacity:1}
 `
 
+const fadeOut = keyframes`
+  0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}
+  100%{-webkit-transform:translateY(-50px);transform:translateY(-50px);opacity:0}}@keyframes fade-out-top{0%{-webkit-transform:translateY(0);transform:translateY(0);opacity:1}100%{-webkit-transform:translateY(-50px);transform:translateY(-50px);opacity:0}
+`
+
 export const FinalMascot = styled.img`
 	animation: ${rollInLeft} 0.9s ease-out both;
+`
+
+export const PointsDiv = styled.span`
+  animation: ${fadeOut} 3.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; 
+  font-size: 200%;
+  position: absolute;
+  color: black;
+  left: 0;
+  font-weight: bolder;
 `
 
 export const BoardDiv = styled.div`

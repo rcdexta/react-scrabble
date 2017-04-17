@@ -6,7 +6,7 @@ import Score from './Score'
 import Hint from './Hint'
 import FinalPopup from './FinalPopup'
 import Generator from '../helpers/generator'
-import Scorer from '../helpers/scorer'
+import {calculteScore} from '../helpers/scorer'
 import ReactCountdownClock from 'react-countdown-clock'
 
 export default class Grid extends Component {
@@ -154,7 +154,7 @@ export default class Grid extends Component {
               const selected = curSelectionPos.some((sel) => sel.row === i && sel.col === j)
               const completed = completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
               const victoryTile = wordFound && lastElement && lastElement.row === i && lastElement.col === j
-              const victoryScore = victoryTile ? Scorer.calculate(lastFoundWord) : 0
+              const victoryScore = victoryTile ? calculteScore(lastFoundWord) : 0
               return <Tile id={id}
                            key={id}
                            letter={letter}

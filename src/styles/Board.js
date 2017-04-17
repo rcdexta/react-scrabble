@@ -21,12 +21,12 @@ export const FinalMascot = styled.img`
 `
 
 export const PointsDiv = styled.span`
-  animation: ${fadeOut} 3.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; 
+  animation: ${fadeOut} 2.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; 
   font-size: 200%;
   position: absolute;
-  color: black;
-  left: 0;
+  color: #C6FF00;
   font-weight: bolder;
+  z-index: 1000;
 `
 
 export const BoardDiv = styled.div`

@@ -17,6 +17,7 @@ export default class Grid extends Component {
     completedSelectionPos: [],
     completedWords: [],
     hintsTaken: 0,
+    wordFound: false
   }
 
   sameRow = (selection, row) => {
@@ -100,6 +101,7 @@ export default class Grid extends Component {
     if (this.words.some((w) => w === currentWord)) {
       this.setState(update(this.state,
         {
+          wordFound: {$set: true},
           curSelectionPos: {$set: []},
           curSelectionLetters: {$set: []},
           completedSelectionPos: {
@@ -112,6 +114,8 @@ export default class Grid extends Component {
         this.props.updateStats(this.stats())
         this.checkIfPlayerWon()
       })
+    } else {
+      this.setState({wordFound: false})
     }
   }
 
@@ -137,15 +141,18 @@ export default class Grid extends Component {
   }
 
   render() {
-    const {completedWords, hintDirection, grid, showFinalPopup} = this.state
+    const {completedWords, hintDirection, grid, showFinalPopup, curSelectionPos, completedSelectionPos, wordFound} = this.state
+    const [lastElement] = completedSelectionPos.length > 0 ? completedSelectionPos.slice(-1) : [undefined]
     return <BoardLayout>
       <GridDiv>
         {
           grid && grid.map((row, i) => {
             return row.map((letter, j) => {
               const id = `${i}${j}`
-              const selected = this.state.curSelectionPos.some((sel) => sel.row === i && sel.col === j)
-              const completed = this.state.completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
+              const selected = curSelectionPos.some((sel) => sel.row === i && sel.col === j)
+              const completed = completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
+              const victoryTile = wordFound && lastElement && lastElement.row === i && lastElement.col === j
+
               return <Tile id={id}
                            key={id}
                            letter={letter}
@@ -154,6 +161,7 @@ export default class Grid extends Component {
                            row={i}
                            col={j}
                            notifySelect={this.handleSelect}
+                           victoryTile={victoryTile}
               />
             })
           })
@@ -164,14 +172,14 @@ export default class Grid extends Component {
         <FinalPopup show={showFinalPopup} completed={this.hasCompleted()} onExit={this.props.onExit}/>
         {
           !showFinalPopup &&
-              <CounterDiv>
-                <ReactCountdownClock seconds={this.props.duration}
-                                     color="ivory"
-                                     alpha={0.9}
-                                     size={85}
-                                     weight={10}
-                                     onComplete={this.timeup}/>
-              </CounterDiv>
+          <CounterDiv>
+            <ReactCountdownClock seconds={this.props.duration}
+                                 color="ivory"
+                                 alpha={0.9}
+                                 size={85}
+                                 weight={10}
+                                 onComplete={this.timeup}/>
+          </CounterDiv>
         }
       </RightPane>
       <RightPane>

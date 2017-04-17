@@ -6,6 +6,7 @@ import Score from './Score'
 import Hint from './Hint'
 import FinalPopup from './FinalPopup'
 import Generator from '../helpers/generator'
+import Scorer from '../helpers/scorer'
 import ReactCountdownClock from 'react-countdown-clock'
 
 export default class Grid extends Component {
@@ -142,7 +143,8 @@ export default class Grid extends Component {
 
   render() {
     const {completedWords, hintDirection, grid, showFinalPopup, curSelectionPos, completedSelectionPos, wordFound} = this.state
-    const [lastElement] = completedSelectionPos.length > 0 ? completedSelectionPos.slice(-1) : [undefined]
+    const [lastElement] = completedSelectionPos.slice(-1)
+    const [lastFoundWord] = completedWords.slice(-1)
     return <BoardLayout>
       <GridDiv>
         {
@@ -152,7 +154,7 @@ export default class Grid extends Component {
               const selected = curSelectionPos.some((sel) => sel.row === i && sel.col === j)
               const completed = completedSelectionPos.some((sel) => sel.row === i && sel.col === j)
               const victoryTile = wordFound && lastElement && lastElement.row === i && lastElement.col === j
-
+              const victoryScore = victoryTile ? Scorer.calculate(lastFoundWord) : 0
               return <Tile id={id}
                            key={id}
                            letter={letter}
@@ -162,6 +164,7 @@ export default class Grid extends Component {
                            col={j}
                            notifySelect={this.handleSelect}
                            victoryTile={victoryTile}
+                           victoryScore={victoryScore}
               />
             })
           })
@@ -174,7 +177,7 @@ export default class Grid extends Component {
           !showFinalPopup &&
           <CounterDiv>
             <ReactCountdownClock seconds={this.props.duration}
-                                 color="ivory"
+                                 color="#F0F4C3"
                                  alpha={0.9}
                                  size={85}
                                  weight={10}

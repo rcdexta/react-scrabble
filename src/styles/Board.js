@@ -23,8 +23,9 @@ export const FinalMascot = styled.img`
 export const PointsDiv = styled.span`
   animation: ${fadeOut} 2.5s cubic-bezier(0.250, 0.460, 0.450, 0.940) both; 
   font-size: 200%;
+  font-family: Oswald, sans-serif;
   position: absolute;
-  color: #C6FF00;
+  color: #1B5E20;
   font-weight: bolder;
   z-index: 1000;
 `

@@ -9,7 +9,7 @@ export default class Tile extends Component {
   }
 
   points = () => {
-    return <PointsDiv>+1</PointsDiv>
+    return <PointsDiv>+{this.props.victoryScore}</PointsDiv>
   }
 
   render() {
@@ -34,5 +34,6 @@ Tile.PropTypes = {
   selected: PropTypes.bool.isRequired,
   completed: PropTypes.bool.isRequired,
   notifySelect: PropTypes.func,
-  victoryTile: PropTypes.bool.isRequired
+  victoryTile: PropTypes.bool.isRequired,
+  victoryScore: PropTypes.number.isRequired
 }
